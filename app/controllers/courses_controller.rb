@@ -70,6 +70,10 @@ class CoursesController < ApplicationController
     @course=tmp
   end
 
+  def show
+    @course=Course.find_by_id(params[:id])
+  end
+
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course

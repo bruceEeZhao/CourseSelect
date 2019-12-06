@@ -11,8 +11,8 @@
 </head>
 
 <body class="<%= "body-background" if params[:controller]!="homes" %>">
-
 <%= render partial: 'layouts/header' %>
+<%= render 'search/form' %>
 <%= render partial: 'layouts/content' %>
 <%= render partial: 'layouts/footer' %>
 

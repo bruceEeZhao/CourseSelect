@@ -1,4 +1,35 @@
+require 'elasticsearch/model'
+
 class Course < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+ 
+  index_name    "courses"
+  document_type "post"
+
+
+  def self.search(query)
+    __elasticsearch__.search(
+      {
+        query: {
+          multi_match: {
+            query: query,
+            fields: ['name', 'course_week']
+          }
+        },
+        highlight: {
+          pre_tags: ['<em>'],
+          post_tags: ['</em>'],
+          fields: {
+            name: {},
+            course_week: {}
+          }
+        }
+      }
+    )
+  end
+  
+
 
   has_many :grades
   has_many :users, through: :grades

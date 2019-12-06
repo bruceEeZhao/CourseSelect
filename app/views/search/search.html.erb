@@ -1,0 +1,22 @@
+<h1>Search Results</h1>
+ 
+<% if @courses %>
+  <ul class="search_results">
+    <% @courses.each do |course| %>
+      <li>
+        <h3>
+          <%= link_to course.try(:highlight).try(:name) ?
+              course.highlight.name[0].html_safe : course.name,
+              controller: "courses", action: "show", id: course._id %>
+        </h3>
+        <% if course.try(:highlight).try(:text) %>
+          <% course.highlight.text.each do |snippet| %>
+          <p><%= snippet.html_safe %>...</p>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<% else %>
+  <p>Your search did not match any documents.</p>
+<% end %>
