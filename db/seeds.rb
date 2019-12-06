@@ -142,6 +142,7 @@ teacher_map.keys.each do |index|
       limit_num: course_map[index][:limit_num],
       course_week: course_map[index][:course_week],
       course_time: course_map[index][:course_time],
+      course_time_day: course_map[index][:course_time_day],
       class_room: course_map[index][:class_room],
       teaching_type: course_map[index][:teaching_type],
       exam_type: course_map[index][:exam_type],

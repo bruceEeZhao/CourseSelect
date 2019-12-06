@@ -12,6 +12,9 @@
     </div>
 
     <div class="form-group">
+      <%= f.label "课程属性", class: 'col-sm-3 control-label' %>
+<!--增添课程编号 -->
+<div class="form-group">
       <%= f.label "课程编号", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">
         <div class="input-group">
@@ -21,12 +24,13 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label "课程属性", class: 'col-sm-3 control-label' %>
-      <div class="col-sm-9">
-        <div class="input-group">
-          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_type, class: 'form-control', placeholder: "输入课程属性" %>
+
+<!--  课程属性增加下拉框 -->
+    <div class="container">
+      <%= f.label "课程属性", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-7">
+        <div class="form-group">
+        <%= f.select :course_type,options_for_select([ ['公共选修课'], ['公共必修课'], ['专业选修课'], ['专业必修课'] ]) %>
         </div>
       </div>
     </div>
@@ -35,18 +39,18 @@
       <%= f.label "授课方式", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">
         <div class="input-group">
-          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
+          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>  
           <%= f.text_field :teaching_type, class: 'form-control', placeholder: "输入授课方式" %>
         </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label "考试方式", class: 'col-sm-3 control-label' %>
-      <div class="col-sm-9">
-        <div class="input-group">
-          <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :exam_type, class: 'form-control', placeholder: "输入考试方式" %>
+    <!--  考试方式下拉框 -->
+    <div class="container">
+      <%= f.label "考试方式", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-7">
+        <div class="form-group">
+        <%= f.select :exam_type,options_for_select([ ['笔试开卷'], ['笔试闭卷'], ['书面报告'], ['自定义'] ]) %>
         </div>
       </div>
     </div>
@@ -82,25 +86,39 @@
       </div>
     </div>
 
+    
     <div class="form-group">
       <%= f.label "上课周数", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_week, class: 'form-control', placeholder: "输入课时学分" %>
+          <%= f.text_field :course_week, class: 'form-control', placeholder: "输入上课周数" %>
         </div>
       </div>
     </div>
 
+    <!--上课时间是具体到周几的第几节  -->
+    <div class="container">
+      <%= f.label "上课时间", class: 'col-sm-2 control-label' %>
+      <div class="col-sm-7">
+        <div class="form-group">
+        <%= f.select :course_time,options_for_select([ ['周一'], ['周二'], ['周三'], ['周四'], ['周五'] ]) %>
+        <%= f.select :course_time_day,options_for_select([ ['1-2节'], ['3-4节'], ['5-6节'], ['7-8节'] ]) %>   
+        </div>
+      </div>
+    </div>
+
+    <!--
     <div class="form-group">
       <%= f.label "上课时间", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_time, class: 'form-control', placeholder: "输入课时学分" %>
+          <%= f.text_field :course_time, class: 'form-control', placeholder: "输入上课时间" %>
         </div>
       </div>
     </div>
+-->
 
     <%= f.submit '提交', class: "btn btn-success btn-block" %>
     <%= link_to '取消', courses_path, :class => "btn btn-default btn-block" %>

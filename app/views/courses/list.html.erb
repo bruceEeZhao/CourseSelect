@@ -53,4 +53,45 @@
   </div>
 </div>
 
+<!--悬浮课程表  -->
+<div class="container" style="padding: 100px 50px 10px;" >
+	<button type="button" class="btn btn-default" title="Popover title"  
+			data-container="body" data-toggle="popover" data-placement="top" 
+			data-content="课程相关的一些内容">
+		周一课程的详细展示
+	</button>
+	<button type="button" class="btn btn-primary" title="Popover title"  
+			data-container="body" data-toggle="popover" data-placement="top" 
+			data-content="课程相关的一些内容">
+		周二课程的详细展示
+	</button>
+	<button type="button" class="btn btn-success" title="Popover title"  
+			data-container="body" data-toggle="popover" data-placement="top" 
+			data-content="课程相关的一些内容">
+		周三课程的详细展示
+	</button>
+	<button type="button" class="btn btn-warning" title="Popover title"  
+			data-container="body" data-toggle="popover" data-placement="top" 
+			data-content="课程相关的一些内容">
+		周四课程的详细展示
+  </button>
+  <button type="button" class="btn btn-primary" title="Popover title"  
+			data-container="body" data-toggle="popover" data-placement="top" 
+			data-content="课程相关的一些内容">
+		周五课程的详细展示
+	</button>
+</div>
+<script>
+$(function () { 
+	$("[data-toggle='popover']").popover();
+});
+</script>
 
+
+<button class="btn btn-outline-secondary"  id="btnExport">导出</button>
+
+<script>
+$('#btnExport').bind('click', function () {
+    tableExport()
+})
+</script>
