@@ -23,9 +23,12 @@ Rails.application.routes.draw do
       get :quit
       get :open
       get :close
+      get :join
+      get :no_join
     end
     collection do
       get :list
+      get :choice
     end
   end
 

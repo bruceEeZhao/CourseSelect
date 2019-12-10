@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191203125225) do
+ActiveRecord::Schema.define(version: 20191208132228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20191203125225) do
     t.datetime "updated_at",                      null: false
     t.boolean  "open",            default: false
     t.string   "course_time_day"
+    t.boolean  "join"            default：false
   end
 
   create_table "grades", force: :cascade do |t|
@@ -45,6 +46,15 @@ ActiveRecord::Schema.define(version: 20191203125225) do
 
   add_index "grades", ["course_id"], name: "index_grades_on_course_id", using: :btree
   add_index "grades", ["user_id"], name: "index_grades_on_user_id", using: :btree
+
+  create_table "timetables", force: :cascade do |t|
+    t.string   "course_name"
+    t.string   "user_name"
+    t.string   "weekday"
+    t.string   "course_section"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

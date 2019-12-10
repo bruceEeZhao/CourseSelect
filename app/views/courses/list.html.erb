@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-sm-2">
       <%= render "shared/sidenav" %>
-
     </div>
     <div class="col-sm-10">
       <div class="panel panel-primary">
+      <button class="btn btn-primary pull-right" id="btnExport">导出</button>
         <div class="panel-heading">
           <h3 class="panel-title">选修课程</h3>
         </div>
@@ -40,7 +40,16 @@
                   <td><%= course.teaching_type %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
-                  <td><%= link_to "加入课程", select_course_path(course), class: 'btn-sm btn-info' %></td>
+                  
+
+                  
+                  <!--选课界面功能实现  -->
+                  <% if course.join? %>
+                      <td><%= link_to "退选课程", no_join_course_url(course), class: 'btn btn-xs btn-danger' %></td>
+                  <% else %>
+                      <td><%= link_to "加入课程", join_course_url(course), class: 'btn btn-xs btn-info' %></td>
+                  <% end %>
+
 
                 </tr>
             <% end %>
@@ -53,42 +62,67 @@
   </div>
 </div>
 
-<!--悬浮课程表  -->
-<div class="container" style="padding: 100px 50px 10px;" >
-	<button type="button" class="btn btn-default" title="Popover title"  
-			data-container="body" data-toggle="popover" data-placement="top" 
-			data-content="课程相关的一些内容">
-		周一课程的详细展示
-	</button>
-	<button type="button" class="btn btn-primary" title="Popover title"  
-			data-container="body" data-toggle="popover" data-placement="top" 
-			data-content="课程相关的一些内容">
-		周二课程的详细展示
-	</button>
-	<button type="button" class="btn btn-success" title="Popover title"  
-			data-container="body" data-toggle="popover" data-placement="top" 
-			data-content="课程相关的一些内容">
-		周三课程的详细展示
-	</button>
-	<button type="button" class="btn btn-warning" title="Popover title"  
-			data-container="body" data-toggle="popover" data-placement="top" 
-			data-content="课程相关的一些内容">
-		周四课程的详细展示
-  </button>
-  <button type="button" class="btn btn-primary" title="Popover title"  
-			data-container="body" data-toggle="popover" data-placement="top" 
-			data-content="课程相关的一些内容">
-		周五课程的详细展示
-	</button>
+<!--  课程表实时展示 -->
+<div class="container" style="background-color: #E5E5E5;">
+  <h3 class="">课程表实时展示区:   
+  <button class="btn btn， pull-right" id="refresh">刷新</button>    </h3>
+  <p>注意：随时观看可变，避免冲突</p>
+  <table class="table table-bordered">
+    <thead>
+    <tr class="info">
+        <th>周一</th>
+        <th>周二</th>
+        <th>周三</th>
+        <th>周四</th>
+        <th>周五</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr class="info">
+        <td>dasdasd</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+      </tr>      
+      <tr class="info">
+        <td>Primary</td>
+        <td>Joe</td>
+        <td>joe@example.com</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+      </tr>
+      <tr class="info">
+        <td>Success</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+      </tr>
+      <tr class="info">
+        <td>Danger</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+      </tr>
+      </tr>
+      <tr class="info">
+        <td>Danger</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+        <td>Defaultson</td>
+        <td>def@somemail.com</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
 <script>
-$(function () { 
-	$("[data-toggle='popover']").popover();
-});
+$('#refresh').bind('click', function () {
+    refresh()
+})
 </script>
-
-
-<button class="btn btn-outline-secondary"  id="btnExport">导出</button>
 
 <script>
 $('#btnExport').bind('click', function () {

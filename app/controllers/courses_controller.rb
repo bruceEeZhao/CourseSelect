@@ -55,6 +55,34 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+  #添加已选课程功能的
+  def join
+    #@course=Course.find_by_id(params[:id])
+    #@course.update_attributes(join: true)
+    #redirect_to courses_path, flash: {:success => "成功选择该课程:#{ @course.name}"}
+
+    @course=Course.find_by_id(params[:id])
+    #@course.update_attributes(join: true)
+    @course.update_attributes(join: true)
+    current_user.courses<<@course
+    flash={:suceess => "成功选择课程: #{@course.name}"}
+    redirect_to courses_path, flash: flash
+  end
+ 
+  #退选功能
+  def no_join
+    #@course=Course.find_by_id(params[:id])
+    #@course.update_attributes(join: false)
+    #redirect_to courses_path, flash: {:success => "已经选择该课程:#{ @course.name}"}
+
+    @course=Course.find_by_id(params[:id])
+    #@course.update_attributes(join: false)
+    @course.update_attributes(join: false)
+    current_user.courses.delete(@course)
+    flash={:success => "成功退选课程: #{@course.name}"}
+    redirect_to courses_path, flash: flash
+  end
+  
   #-------------------------for students----------------------
 
   def list
@@ -69,7 +97,7 @@ class CoursesController < ApplicationController
     end
     @course=tmp
   end
-
+  
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course
@@ -84,6 +112,18 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+    #选课界面的选择和推选功能的实现
+    def choice
+      @courses = Course.where(:join=>true).paginate(page: params[:page], per_page: 4)
+      @course = @courses-current_user.courses
+      tmp=[]
+      @course.each do |course|
+        if course.join==true
+          tmp<<course
+        end
+      end
+      @course=tmp
+    end
 
   #-------------------------for both teachers and students----------------------
 
