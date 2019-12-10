@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
-
+  get "search", to: "search#search"
 
   # Example resource route with options:
   #   resources :products do

@@ -97,7 +97,15 @@ class CoursesController < ApplicationController
     end
     @course=tmp
   end
+<<<<<<< HEAD
   
+=======
+
+  def show
+    @course=Course.find_by_id(params[:id])
+  end
+
+>>>>>>> 606d09cdcfee81c45bb5745a207867b9e7a4c52e
   def select
     @course=Course.find_by_id(params[:id])
     current_user.courses<<@course

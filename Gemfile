@@ -1,5 +1,8 @@
 source 'https://gems.ruby-china.com'
 
+gem 'searchkick', '~> 3.1', '>= 3.1.3'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'bootstrap-sass', '~> 3.3.7'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.11'

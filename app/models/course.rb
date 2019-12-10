@@ -1,11 +1,14 @@
-class Course < ActiveRecord::Base
+require 'elasticsearch/model'
 
+class Course < ActiveRecord::Base
+  searchkick language: "chinese"
+ 
   has_many :grades
   has_many :users, through: :grades
 
   belongs_to :teacher, class_name: "User"
 
-  validates :name, :course_type, :course_time, :course_time_day, :course_code,:course_week,
+  validates :course_code, :name, :course_type, :course_time, :course_time_day, :course_week,
             :class_room, :credit, :teaching_type, :exam_type, presence: true, length: {maximum: 50}
 
 

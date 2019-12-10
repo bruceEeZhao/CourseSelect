@@ -1,3 +1,5 @@
+require Rails.root.join('lib', 'rails_admin_course_open.rb')
+
 RailsAdmin.config do |config|
 
   # config.main_app_name = ["Cool app", "BackOffice"]
@@ -43,6 +45,22 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
+
+  # Register the class in lib/rails_admin_publish.rb
+  module RailsAdmin
+    module Config
+      module Actions
+        class CourseOpen < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+        class CourseClose < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+      end
+    end
+  end
+
+
   config.actions do
     # root actions
     dashboard                     # mandatory
@@ -58,5 +76,19 @@ RailsAdmin.config do |config|
     delete
     history_show
     # show_in_app
+    course_open do
+      # Make it visible only for article model. You can remove this if you don't need.
+      visible do
+        bindings[:abstract_model].model.to_s == "Course"
+      end
+    end
+    course_close do
+      # Make it visible only for article model. You can remove this if you don't need.
+      visible do
+        bindings[:abstract_model].model.to_s == "Course"
+      end
+    end
+
   end
+
 end
