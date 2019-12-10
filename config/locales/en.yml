@@ -63,6 +63,10 @@ en:
       item: "Item"
       message: "Message"
     actions:
+      course_open:
+        menu: "course_open"
+      course_close:
+        menu: "course_close"
       dashboard:
         title: "Site Administration"
         menu: "Dashboard"
