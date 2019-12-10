@@ -9,6 +9,13 @@ class SearchController < ApplicationController
       term = params[:term]
       #To only match the exact order, use:
       @courses = Course.search term, highlight: true, match: :phrase
+      tmp = []
+      @courses.each do |course|
+        if course.open == true
+          tmp << course
+        end
+      end
+      @courses = tmp
     end
   end
 
