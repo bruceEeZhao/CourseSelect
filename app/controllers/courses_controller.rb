@@ -86,18 +86,18 @@ class CoursesController < ApplicationController
     redirect_to :back, flash: flash
   end
 
-  def list
-    #-------QiaoCode--------
-    @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
-    @course = @courses-current_user.courses
-    tmp=[]
-    @course.each do |course|
-      if course.open==true
-        tmp<<course
-      end
-    end
-    @course=tmp
-  end
+  # def list
+  #   #-------QiaoCode--------
+  #   @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
+  #   @course = @courses-current_user.courses
+  #   tmp=[]
+  #   @course.each do |course|
+  #     if course.open==true
+  #       tmp<<course
+  #     end
+  #   end
+  #   @course=tmp
+  # end
 
   #-------------------------for both teachers and students----------------------
 

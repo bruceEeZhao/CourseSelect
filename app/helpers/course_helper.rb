@@ -1,4 +1,18 @@
 module CourseHelper
+
+  def list
+    #-------QiaoCode--------
+    @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
+    @course = @courses-current_user.courses
+    tmp=[]
+    @course.each do |course|
+      if course.open==true
+        tmp<<course
+      end
+    end
+    @course=tmp
+  end
+
     def my_course_list
         course= current_user.courses
         get_course_table(course)
