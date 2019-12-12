@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-
+  include CourseHelper
   before_action :student_logged_in, only: [:select, :quit, :list]
   before_action :teacher_logged_in, only: [:new, :create, :edit, :destroy, :update, :open, :close]#add open by qiao
   before_action :logged_in, only: :index
@@ -37,13 +37,13 @@ class CoursesController < ApplicationController
 
   def open
     @course=Course.find_by_id(params[:id])
-    @course.update_attributes(open: true)
+    @course.update_attribute(:open, true)
     redirect_to courses_path, flash: {:success => "已经成功开启该课程:#{ @course.name}"}
   end
 
   def close
     @course=Course.find_by_id(params[:id])
-    @course.update_attributes(open: false)
+    @course.update_attribute(:open, false)
     redirect_to courses_path, flash: {:success => "已经成功关闭该课程:#{ @course.name}"}
   end
 
@@ -55,25 +55,36 @@ class CoursesController < ApplicationController
     redirect_to courses_path, flash: flash
   end
 
+  #-------------------------for students----------------------
+
   #添加已选课程功能的
   def join
-    @course=Course.find_by_id(params[:id])
-    @course.update_attributes(join: true)
-    current_user.courses<<@course
-    flash={:suceess => "成功选择课程: #{@course.name}"}
-    redirect_to list_courses_path, flash: flash
+    @course = Course.find_by_id(params[:id])
+
+    if is_over_number?(@course)
+      flash = {:warning => "选课失败!课程: #{@course.name} 人数已满!"}
+    elsif is_exit_course?(params[:id])
+      flash = {:warning => "您的课表中已存在:#{@course.name}，请选择其他课程！"}
+    elsif is_time_conflict?(@course) #need to modify later
+      flash = {:warning => "课程:#{@course.name}, 与课表中的课程存在时间冲突!"}
+    else
+      @course.update_attribute(:join, true)
+      current_user.courses<< @course
+      @course.update_attribute(:student_num, @course.student_num + 1)
+      flash = {:info => "成功选择课程: #{@course.name}"}
+    end
+    redirect_to :back, flash: flash
   end
- 
+  
   #退选功能
   def no_join
     @course=Course.find_by_id(params[:id])
-    @course.update_attributes(join: false)
+    @course.update_attribute(:join, false)
+    @course.update_attribute(:student_num, @course.student_num - 1)
     current_user.courses.delete(@course)
     flash={:success => "成功退选课程: #{@course.name}"}
-    redirect_to courses_path, flash: flash
+    redirect_to :back, flash: flash
   end
-  
-  #-------------------------for students----------------------
 
   def list
     #-------QiaoCode--------
@@ -86,24 +97,6 @@ class CoursesController < ApplicationController
       end
     end
     @course=tmp
-  end
-
-  def show
-    @course=Course.find_by_id(params[:id])
-  end
-
-  def select
-    @course=Course.find_by_id(params[:id])
-    current_user.courses<<@course
-    flash={:suceess => "成功选择课程: #{@course.name}"}
-    redirect_to courses_path, flash: flash
-  end
-
-  def quit
-    @course=Course.find_by_id(params[:id])
-    current_user.courses.delete(@course)
-    flash={:success => "成功退选课程: #{@course.name}"}
-    redirect_to courses_path, flash: flash
   end
 
   #-------------------------for both teachers and students----------------------

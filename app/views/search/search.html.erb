@@ -3,7 +3,6 @@
     <div class="col-sm-2">
       <%= render 'search/form' %>
       <%= render "shared/sidenav" %>
-      <%= yield %>
 
     </div>
     <div class="col-sm-10">
@@ -19,6 +18,7 @@
               <tr>
                 <th>课程编号</th>
                 <th>课程名称</th>
+                <th>上课时间</th>
                 <th>课时/学分</th>
                 <th>限选</th>
                 <th>已选</th>
@@ -36,6 +36,7 @@
 
                 <td><%= course.course_code %></td>
                 <td><%= course.name %></td>
+                <td><%= course.course_week %></td>
                 <td><%= course.credit %></td>
                 <td><%= course.limit_num %></td>
                 <td><%= course.student_num %></td>
@@ -62,58 +63,7 @@
 
 <!--  课程表实时展示 -->
 <div class="container" style="background-color: #E5E5E5;">
-  <h3 class="">课程表实时展示区:
-    <button class="btn btn， pull-right" id="refresh">刷新</button> </h3>
-  <p>注意：随时观看可变，避免冲突</p>
-  <table class="table table-bordered">
-    <thead>
-      <tr class="info">
-        <th>周一</th>
-        <th>周二</th>
-        <th>周三</th>
-        <th>周四</th>
-        <th>周五</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="info">
-        <td>dasdasd</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>
-      <tr class="info">
-        <td>Primary</td>
-        <td>Joe</td>
-        <td>joe@example.com</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>
-      <tr class="info">
-        <td>Success</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>
-      <tr class="info">
-        <td>Danger</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>
-      </tr>
-      <tr class="info">
-        <td>Danger</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>
-    </tbody>
-  </table>
+  <%= render "courses/courselist" %>
 </div>
 
 <script>
