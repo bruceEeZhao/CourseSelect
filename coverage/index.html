@@ -989,7 +989,7 @@
         <li class="missed" data-hits="0" data-linenumber="62">
           
           
-          <code class="ruby">    @courses = Course.where(:open=&gt;true).paginate(page: params[:page], per_page: 4)</code>
+          <code class="ruby">    @courses = Course.where(:open=&gt;true).paginate(page: params[:page])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="63">
@@ -1163,13 +1163,13 @@
         <li class="missed" data-hits="0" data-linenumber="91">
           
           
-          <code class="ruby">    @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?</code>
+          <code class="ruby">    @course=current_user.teaching_courses.paginate(page: params[:page]) if teacher_logged_in?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="92">
           
           
-          <code class="ruby">    @course=current_user.courses.paginate(page: params[:page], per_page: 4) if student_logged_in?</code>
+          <code class="ruby">    @course=current_user.courses.paginate(page: params[:page]) if student_logged_in?</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="93">
@@ -1500,7 +1500,7 @@
         <li class="missed" data-hits="0" data-linenumber="19">
           
           
-          <code class="ruby">      @grades = @course.grades.order(created_at: &quot;desc&quot;).paginate(page: params[:page], per_page: 4)</code>
+          <code class="ruby">      @grades = @course.grades.order(created_at: &quot;desc&quot;).paginate(page: params[:page])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="20">
@@ -1512,7 +1512,7 @@
         <li class="missed" data-hits="0" data-linenumber="21">
           
           
-          <code class="ruby">      @grades=current_user.grades.paginate(page: params[:page], per_page: 4)</code>
+          <code class="ruby">      @grades=current_user.grades.paginate(page: params[:page])</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="22">

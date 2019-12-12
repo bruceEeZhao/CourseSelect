@@ -44,7 +44,7 @@ module SearchHelper
           tmp << course
         end
       end
-      @courses = tmp
+      @courses = Kaminari.paginate_array(tmp).page(params[:page]).per(10)
     end
   end
 

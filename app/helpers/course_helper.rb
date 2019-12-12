@@ -1,8 +1,8 @@
 module CourseHelper
-
+  WillPaginate.per_page = 10
   def list
     #-------QiaoCode--------
-    @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
+    @courses = Course.where(:open=>true).paginate(page: params[:page])
     @course = @courses-current_user.courses
     tmp=[]
     @course.each do |course|

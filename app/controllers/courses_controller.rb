@@ -88,7 +88,7 @@ class CoursesController < ApplicationController
 
   # def list
   #   #-------QiaoCode--------
-  #   @courses = Course.where(:open=>true).paginate(page: params[:page], per_page: 4)
+  #   @courses = Course.where(:open=>true).paginate(page: params[:page])
   #   @course = @courses-current_user.courses
   #   tmp=[]
   #   @course.each do |course|
@@ -102,8 +102,8 @@ class CoursesController < ApplicationController
   #-------------------------for both teachers and students----------------------
 
   def index
-    @course=current_user.teaching_courses.paginate(page: params[:page], per_page: 4) if teacher_logged_in?
-    @course=current_user.courses.paginate(page: params[:page], per_page: 4) if student_logged_in?
+    @course=current_user.teaching_courses.paginate(page: params[:page]) if teacher_logged_in?
+    @course=current_user.courses.paginate(page: params[:page]) if student_logged_in?
   end
 
 
