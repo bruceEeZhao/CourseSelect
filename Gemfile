@@ -1,5 +1,5 @@
 source 'https://gems.ruby-china.com'
-
+ruby '2.3.8'
 gem 'searchkick', '~> 3.1', '>= 3.1.3'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
