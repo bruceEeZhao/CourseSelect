@@ -25,10 +25,11 @@
 
 
 <!--  课程属性增加下拉框 -->
-    <div class="container">
-      <%= f.label "课程属性", class: 'col-sm-2 control-label' %>
-      <div class="col-sm-7">
-        <div class="form-group">
+    <div class="form-group">
+      <%= f.label "课程属性", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+      <div class="input-group">
+      <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
         <%= f.select :course_type,options_for_select([ ['公共选修课'], ['公共必修课'], ['专业选修课'], ['专业必修课'] ]) %>
         </div>
       </div>
@@ -45,10 +46,11 @@
     </div>
 
     <!--  考试方式下拉框 -->
-    <div class="container">
-      <%= f.label "考试方式", class: 'col-sm-2 control-label' %>
-      <div class="col-sm-7">
-        <div class="form-group">
+    <div class="form-group">
+      <%= f.label "考试方式", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+      <div class="input-group">
+      <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
         <%= f.select :exam_type,options_for_select([ ['笔试开卷'], ['笔试闭卷'], ['书面报告'], ['自定义'] ]) %>
         </div>
       </div>
@@ -69,7 +71,7 @@
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :credit, class: 'form-control', placeholder: "输入课时学分" %>
+          <%= f.text_field :credit, class: 'form-control', placeholder: "输入课时学分，如：60/3.0" %>
         </div>
       </div>
     </div>
@@ -91,34 +93,34 @@
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_week, class: 'form-control', placeholder: "输入上课周数" %>
+          <%= f.text_field :course_week, class: 'form-control', placeholder: "输入周次，如：第1-10周（如一周多次课，按分号隔开）" %>
         </div>
       </div>
     </div>
 
-    <!--上课时间是具体到周几的第几节  -->
-    <div class="container">
-      <%= f.label "上课时间", class: 'col-sm-2 control-label' %>
-      <div class="col-sm-7">
-        <div class="form-group">
+    <!--上课时间是具体到周几的第几节 -->
+    <div class="form-group">
+      <%= f.label "上课时间", class: 'col-sm-3 control-label' %>
+      <div class="col-sm-9">
+        <div class="input-group">
+        <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
         <%= f.select :course_time,options_for_select([ ['周一'], ['周二'], ['周三'], ['周四'], ['周五'] ]) %>
-        <%= f.select :course_time_day,options_for_select([ ['1-2节'], ['3-4节'], ['5-6节'], ['7-8节'] ]) %>   
+        <%= f.select :course_time_day,options_for_select([ ['(1-2)节'], ['(3-4)节'], ['(5-6)节'], ['(7-8)节'] ]) %>   
         </div>
       </div>
     </div>
-
-    <!--
+  
+<!--
     <div class="form-group">
       <%= f.label "上课时间", class: 'col-sm-3 control-label' %>
       <div class="col-sm-9">
         <div class="input-group">
           <div class="input-group-addon"><span class="glyphicon glyphicon-arrow-right"></span></div>
-          <%= f.text_field :course_time, class: 'form-control', placeholder: "输入上课时间" %>
+          <%= f.text_field :course_time, class: 'form-control', placeholder: "输入上课时间，如：周一（3-4）（如一周多次课，按分号隔开）" %>
         </div>
       </div>
     </div>
 -->
-
     <%= f.submit '提交', class: "btn btn-success btn-block" %>
     <%= link_to '取消', courses_path, :class => "btn btn-default btn-block" %>
 

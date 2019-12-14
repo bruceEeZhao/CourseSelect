@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       get :close
       get :join
       get :no_join
+      get :replace
     end
     collection do
       get :list

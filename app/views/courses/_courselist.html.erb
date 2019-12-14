@@ -7,6 +7,7 @@
       <div class="table-responsive">
         <table class="table table-bordered" id="curriculum_table" style="text-align: center">
           <thead>
+          <tr class="info">
           <td></td>
           <td>星期一</td>
           <td>星期二</td>
@@ -15,14 +16,15 @@
           <td>星期五</td>
           <td>星期六</td>
           <td>星期天</td>
+          </tr>
           </thead>
           <tbody>
           <% @course_time_table = my_course_list %>
           <% (0...@course_time_table.length).each do |i| %>
-              <tr>
+              <tr class="info">
                 <td><%= i+1 %></td>
                 <% (0...@course_time_table[i].length).each do |j| %>
-                    <td style="width: 300px;" class='row<%= i+1 %> col<%= j+1 %>' alt="<%= @course_time_table[i][j]['id'] %>" >
+                    <td style="width: 500px;" class='row<%= i+1 %> col<%= j+1 %>' alt="<%= @course_time_table[i][j]['id'] %>" >
                       <%if  @course_time_table[i][j]['credit']!='' %>
                       <%= @course_time_table[i][j]['name'] %>
                       <%  end %>

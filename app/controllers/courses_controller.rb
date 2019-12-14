@@ -65,8 +65,6 @@ class CoursesController < ApplicationController
       flash = {:warning => "选课失败!课程: #{@course.name} 人数已满!"}
     elsif is_exit_course?(params[:id])
       flash = {:warning => "您的课表中已存在:#{@course.name}，请选择其他课程！"}
-    elsif is_time_conflict?(@course) #need to modify later
-      flash = {:warning => "课程:#{@course.name}, 与课表中的课程存在时间冲突!"}
     else
       @course.update_attribute(:join, true)
       current_user.courses<< @course
@@ -75,6 +73,28 @@ class CoursesController < ApplicationController
     end
     redirect_to :back, flash: flash
   end
+
+  def replace
+    @course = Course.find_by_id(params[:id])
+    if is_over_number?(@course)
+      flash = {:warning => "选课失败!课程: #{@course.name} 人数已满!"}
+    elsif is_exit_course?(params[:id])
+      flash = {:warning => "您的课表中已存在:#{@course.name}，请选择其他课程！"}
+    else
+      flag,re_course = is_time_conflict?(@course)
+      if re_course != nil
+        @course.update_attribute(:join, true)
+        re_course.update_attribute(:join, false)
+        
+        current_user.courses.delete(re_course)
+        current_user.courses<< @course
+        @course.update_attribute(:student_num, @course.student_num + 1)
+        flash = {:info => "成功将课程:#{re_course.name} 替换为 #{@course.name}"}
+      end
+    end
+    redirect_to :back, flash: flash
+  end
+
   
   #退选功能
   def no_join

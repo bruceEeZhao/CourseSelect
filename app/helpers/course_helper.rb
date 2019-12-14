@@ -74,6 +74,7 @@ module CourseHelper
   end
 
   def is_time_conflict?(wanted_course)
+    re_course = nil
     flag = false
     org_course_time = wanted_course.course_time
     org_course_week = wanted_course.course_week
@@ -91,14 +92,15 @@ module CourseHelper
           flag = false
         elsif interval_overlap(course_week, course.course_week.scan(/\d+/)) and (temp_week == day_week)
           flag = true
+          re_course = course
           break
         else
           flag = false
         end
         temp_week = ""
       end
-    end
-    flag
+    end 
+    [flag,re_course]
   end
 
   def interval_overlap(interval1, interval2)

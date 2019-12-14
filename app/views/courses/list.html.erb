@@ -43,7 +43,9 @@
 
                 <td><%= course.course_code %></td>
                 <td><%= course.name %></td>
-                <td><%= course.course_week %></td>
+                <td><%= course.course_week %> ,每
+                <%= course.course_time %>
+                <%= course.course_time_day %></td>
                 <td><%= course.credit %></td>
                 <td><%= course.limit_num %></td>
                 <td><%= course.student_num %></td>
@@ -54,10 +56,23 @@
 
                 <!--选课界面功能实现  -->
                 <% if course.join? %>
-                <td><%= link_to "退选课程", no_join_course_url(course), class: 'btn btn-xs btn-danger' %></td>
+                <td><%= link_to "退选课程", no_join_course_url(course),data: {disable_with: true}, class: 'btn btn-xs btn-danger' %></td>
                 <% else %>
-                <td><%= link_to "加入课程", join_course_url(course), class: 'btn btn-xs btn-info' %></td>
+                <% flag,re_course = is_time_conflict?(course) %>
+                <%if flag%>
+                  <td><%= link_to "加入课程", replace_course_url(course),data: {disable_with: true}, class: 'btn btn-xs btn-info',
+                  :data => {confirm: "确定要将 #{course.name} 替换为 #{re_course.name} 吗?"} %></td>
+                <%else%>
+                  <td><%= link_to "加入课程", join_course_url(course),data: {disable_with: true}, class: 'btn btn-xs btn-info' %></td> 
+                <%end%>
+            
                 <% end %>
+
+                
+                
+                
+                
+
               </tr>
               <% end %>
             </tbody>
@@ -70,18 +85,6 @@
 </div>
 
 <!--  课程表实时展示 -->
-<div class="container" style="background-color: #E5E5E5;">
+<div class="container">
   <%= render "courselist" %>
 </div>
-
-<script>
-  $('#refresh').bind('click', function () {
-    refresh()
-  })
-</script>
-
-<script>
-  $('#btnExport').bind('click', function () {
-    tableExport()
-  })
-</script>
