@@ -151,8 +151,13 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:course_code, :name, :course_type, :teaching_type, :exam_type,
-                                   :credit, :limit_num, :class_room, :course_time, :course_time_day, :course_week)
+    safe_params = params.require(:course).permit(:course_code, :name, :course_type, :teaching_type, :exam_type,
+      :credit, :limit_num, :class_room, :course_time, :course_time_day, :course_week)
+  
+    safe_params.to_hash
+    safe_params[:course_time] = safe_params[:course_time] + safe_params[:course_time_day]
+    safe_params.delete("course_time_day")
+    safe_params
   end
 
 

@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20191208132228) do
     t.datetime "updated_at",                      null: false
     t.boolean  "open",            default: false
     t.string   "course_time_day"
-    t.boolean  "join"             default：false
+    t.boolean  "join"
   end
 
   create_table "grades", force: :cascade do |t|

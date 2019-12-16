@@ -26,7 +26,7 @@ module CourseHelper
             '周四' => 3,
             '周五' => 4,
             '周六' => 5,
-            '周天' => 6,
+            '周日' => 6,
         }
         param[week_data] + 1
     end
