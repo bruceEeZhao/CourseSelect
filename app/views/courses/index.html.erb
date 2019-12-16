@@ -34,13 +34,12 @@
                   <td><%= course.course_code %></td>
                   <td><%= course.name %></td>
                   <td><%= course.credit %></td>
-                  <td><%= course.course_time %>
-                  <%= course.course_time_day %></td>
+                  <td><%= course.course_time %></td>
                   <td><%= course.exam_type %></td>
                   <td><%= course.teacher.name %></td>
 
                   <% if teacher_logged_in? %>
-                      <td><%= link_to "编辑", edit_course_url(course), class: 'btn btn-xs btn-info' %></td>
+                      <td><%= link_to "编辑", edit_course_url(course),class: 'btn btn-xs btn-info' %></td>
                       <% if course.open? %>
                           <td><%= link_to "关闭", close_course_url(course), class: 'btn btn-xs btn-primary' %></td>
                       <% else %>
@@ -48,7 +47,7 @@
                       <% end %>   
                       <td><%= link_to "删除", course_path(course), :method => "delete", class: 'btn btn-xs btn-danger', :data => {confirm: '确定要删除此课程?'} %></td>
                   <% elsif student_logged_in? %>
-                      <td><%= link_to "退选课程", no_join_course_url(course), data: {disable_with: true}, class: 'btn btn-xs btn-danger' %></td>
+                      <td><%= link_to "退选课程", no_join_course_url(course),data: {disable_with: "请稍等...."}, class: 'btn btn-xs btn-danger' %></td>
                   <% end %>
                 </tr>
             <% end %>
@@ -60,3 +59,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    $("#btn").attr("disabled","true");
+    $("#btn").attr("disabled","disabled");
+    $("#btn").attr("disabled","false");
+    $("#btn").removeAttr("disabled","disabled");
+</script>
