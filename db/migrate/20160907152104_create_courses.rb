@@ -11,8 +11,8 @@ class CreateCourses < ActiveRecord::Migration
       t.integer :limit_num
       t.integer :student_num, default: 0
       t.string :class_room
-      t.string :course_time
-      t.string :course_week
+      t.string :course_time  #周一，周二
+      t.string :course_week  
       
 
       

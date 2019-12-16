@@ -77,18 +77,17 @@ RailsAdmin.config do |config|
     history_show
     # show_in_app
     course_open do
-      # Make it visible only for article model. You can remove this if you don't need.
+      # Make it visible only for Course model. You can remove this if you don't need.
       visible do
         bindings[:abstract_model].model.to_s == "Course"
       end
     end
     course_close do
-      # Make it visible only for article model. You can remove this if you don't need.
+      # Make it visible only for Course model. You can remove this if you don't need.
       visible do
         bindings[:abstract_model].model.to_s == "Course"
       end
     end
-
   end
 
 end
