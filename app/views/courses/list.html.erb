@@ -31,8 +31,11 @@
             </thead>
             <tbody>
 
-              <% tmp = search %>
+              <% if_search, tmp = search %>
               <% if tmp.empty? %>
+                <% if if_search==true %>
+                <p class="text-danger"><%= "未搜索到符合的课程,显示全部课程" %><p>
+                <%end%>
               <% @course = list%>         
               <% else %>
               <% @course = tmp%>
@@ -60,7 +63,7 @@
                 <% flag,re_course = is_time_conflict?(course) %>
                 <%if flag%>
                   <td><%= link_to "加入课程", replace_course_url(course), data: {disable_with: "请稍等...."},class: 'btn btn-xs btn-info',
-                  :data => {confirm: "确定要将 #{course.name} 替换为 #{re_course.name} 吗?"} %></td>
+                  :data => {confirm: "时间冲突！！\n确定要将 #{course.name} 替换为 #{re_course.name} 吗?"} %></td>
                 <%else%>
                   <td><%= link_to "加入课程", join_course_url(course),data: {disable_with: "请稍等...."},class: 'btn btn-xs btn-info' %></td> 
                 <%end%>

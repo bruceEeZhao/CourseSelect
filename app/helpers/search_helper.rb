@@ -1,8 +1,11 @@
 module SearchHelper
   def search
-    if params[:term].nil?
+    if_search = false
+    if params[:term] == ""
+      if_search = false
       @courses = []
     else
+      if_search = true
       #去除首尾空格
       term = params[:term].lstrip.rstrip
       term = string_process(term)
@@ -46,6 +49,7 @@ module SearchHelper
       end
       @courses = Kaminari.paginate_array(tmp).page(params[:page]).per(10)
     end
+    return [if_search, @courses]
   end
 
   private
