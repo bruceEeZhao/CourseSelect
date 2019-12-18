@@ -1,7 +1,7 @@
 module SearchHelper
   def search
     if_search = false
-    if params[:term] == ""
+    if params[:term] == "" or params[:term].nil?
       if_search = false
       @courses = []
     else
