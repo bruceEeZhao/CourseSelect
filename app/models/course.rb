@@ -1,5 +1,3 @@
-require 'elasticsearch/model'
-
 class Course < ActiveRecord::Base
   searchkick language: "chinese"
  
